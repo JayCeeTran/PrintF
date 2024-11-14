@@ -10,42 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+
+
+int	ft_putnbr(int n, int fd)
 {
 	int	divider;
-	int	digit;
-
+	int	count;
+	
+	count = 0;
 	divider = 1;
 	if (n == -2147483648)
 	{
 		write(fd, "-2147483648", 11);
-		return ;
+		return (11);
 	}
 	if (n < 0)
 	{
-		ft_putchar_fd('-', fd);
+		ft_putc('-', fd);
 		n *= (-1);
+		count++;
 	}
 	while (n / divider > 9)
 		divider *= 10;
 	while (divider > 0)
 	{
-		digit = n / divider + '0';
-		ft_putchar_fd(digit, fd);
+		ft_putc(n / divider + '0', fd);
 		n %= divider;
 		divider /= 10;
+		count++;
 	}
+	return (count);
 }
-
-/*int	main(void)
-{
-	ft_putnbr_fd(1000, 1);
-	printf("\n");
-	ft_putnbr_fd(-1000, 1);
-	printf("\n");
-	ft_putnbr_fd(-2147483648LL, 2);
-	printf("\n");
-	ft_putnbr_fd(-9874410, 2);
-}*/

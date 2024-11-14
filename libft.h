@@ -19,6 +19,8 @@
 # include <string.h>
 # include <unistd.h>
 
+# define EVEN(x) ((x) % 2 == 0) 
+
 int					ft_atoi(const char *str);
 void				ft_bzero(void *str, size_t n);
 void				*ft_calloc(size_t n, size_t size);
@@ -35,10 +37,8 @@ void				*ft_memmove(void *dest, const void *src, size_t n);
 void				*ft_memset(void *str, int c, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
-void				ft_put_hex_l(unsigned int n, char *basel);
-void				ft_put_hex_u(unsigned int n, char *basel);
-void				ft_put_p(uint64_t n, char *basel);
-void				ft_putnbr_unsig(unsigned int n, int fd);
+int				ft_put_us_hex(unsigned int n, char *basel, int c);
+void				ft_put_p(unsigned long long n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr_fd(char *s, int fd);
 char				**ft_split(char const *str, char c);

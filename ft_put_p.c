@@ -10,38 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-static int	ft_findbase(char *s)
+int	ft_put_p(unsigned long long n)
 {
+	unsigned long long	divider;
 	int	count;
 	
 	count = 0;
-	while (*s)
+	if (n == 0)
 	{
-		count++;
-		s++;
+		write(1, "(nil)", 5);
+		return (5);
 	}
-	return (count);
-}
-
-void	ft_put_p(uint64_t n, char *basel)
-{
-	uint64_t	divider;
-	uint64_t	base;
-	
-	base = ft_findbase(basel);
 	divider = 1;
-	while (n / divider >= base)
-		divider *= base;
+	while (n / divider >= 16)
+		divider *= 16;
 	write (1, "0x", 2);
 	while (divider > 0)
 	{	
 		if (n / divider <= 9)
-			ft_putchar_fd(n / divider + 48, 1);
+			ft_putc(n / divider + 48, 1);
 		else if (n / divider > 9)
-			ft_putchar_fd(n / divider - 10 + 'a', 1);
+			ft_putc(n / divider - 10 + 'a', 1);
 		n %= divider;
-		divider /= base;
+		divider /= 16;
+		count++;
 	}
+	return (count);
 }
