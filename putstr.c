@@ -1,48 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtran <jtran@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 16:15:58 by jtran             #+#    #+#             */
-/*   Updated: 2024/11/07 12:34:18 by jtran            ###   ########.fr       */
+/*   Created: 2024/11/05 16:06:27 by jtran             #+#    #+#             */
+/*   Updated: 2024/11/06 14:17:55 by jtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	dutty_loop(int divider, int n, int *count, int fd)
+int	ft_putstr(char *s, int fd)
 {
-		while (divider > 0)
-		{
-			ft_putc(n / divider + '0', fd);
-			n %= divider;
-			divider /= 10;
-			(*count)++;
-		}
-}
-
-int	ft_putnbr(int n, int fd)
-{
-	int	divider;
 	int	count;
-	
-	count = 0;
-	divider = 1;
-	if (n == -2147483648)
+	char *c;
+
+	c = (char *) s;
+	if (s == NULL)
 	{
-		write(fd, "-2147483648", 11);
-		return (11);
+		write(1, "(null)", 6);
+		return (6);
 	}
-	if (n < 0)
+	count = 0;
+	while (*s)
 	{
-		ft_putc('-', fd);
-		n *= (-1);
+		write(fd, s, 1);
+		s++;
 		count++;
 	}
-	while (n / divider > 9)
-		divider *= 10;
-	dutty_loop(divider, n, &count, fd);
 	return (count);
 }

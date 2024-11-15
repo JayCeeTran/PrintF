@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_findbase(char *s)
 {
@@ -55,11 +55,11 @@ int	ft_put_us_hex(unsigned int n, char *basel, int c)
 	
 	if (n == 0)
 	{
-		write(1, 0, 1);
+		write(1, "0", 1);
 		return (1);
 	}
 	base = ft_findbase(basel);
-	if (!basel || c != 'u' && c != 'x' && c != 'X' || !base)
+	if (!basel || (c != 'u' && c != 'x' && c != 'X') || !base)
 		return (0);
 	divider = 1;
 	while (n / divider >= base)

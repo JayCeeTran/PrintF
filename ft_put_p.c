@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_put_p(unsigned long long n)
 {
@@ -27,6 +27,7 @@ int	ft_put_p(unsigned long long n)
 	while (n / divider >= 16)
 		divider *= 16;
 	write (1, "0x", 2);
+	count+= 2;
 	while (divider > 0)
 	{	
 		if (n / divider <= 9)
