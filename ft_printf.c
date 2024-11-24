@@ -15,17 +15,16 @@
 #include <stdio.h>
 #include <stdint.h>
 
+
 static int	check_symbol(const char **s, va_list args)
-{	
+{ 
 	if (**s == 'c')
 		return(ft_putc(va_arg(args, int), 1));
 	else if (**s == 's')	
-		return(ft_putstr_fd(va_arg(args, void *), 1));
+		return(ft_putstr_f(va_arg(args, void *), 1));
 	else if (**s == 'p')
 		return(ft_put_p(va_arg(args, unsigned long long)));
-	else if (**s == 'd')
-		return(ft_putnbr(va_arg(args, int), 1));
-	else if (**s == 'i')
+	else if (**s == 'i' || **s == 'd')
 		return(ft_putnbr(va_arg(args, int), 1));
 	else if (**s == 'u')
 		return(ft_put_us_hex(va_arg(args, unsigned int), "0123456789", 'u'));
@@ -68,16 +67,31 @@ int	ft_printf(const char *s, ...)
 
 /*int	main(void)
 {
-	ft_printf("%d\n", ft_printf("NULL %s NULL\n", NULL));
-	printf("%d\n", printf("NULL %s NULL\n", NULL));
+	//ft_printf("%d\n", ft_printf("NULL %s NULL\n", NULL));
+	//printf("%d\n", printf("NULL %s NULL\n", NULL));
 
-	ft_printf("%d\n", ft_printf("%s\n", "He\0llo"));
-	printf("%d\n", printf("%s\n", "He\0llo"));
+//	ft_printf("%d\n", ft_printf("%10d\n", 42));
+//	printf("%d\n", printf("%10d\n", 42));
 
-	ft_printf("%d\n", ft_printf("%x %X %d hello\n", -1000, -1000, -1000));
-	printf("%d\n", printf("%x %X %d hello\n", -1000, -1000 , -1000));
+//	ft_printf("%d\n", ft_printf("%-10d\n", 42));
+//	printf("%d\n", printf("%-10d\n", 42));
 
-	ft_printf("%d\n", ft_printf("%s\n", "\0"));
-	printf("%d\n", printf("%s\n", "\0"));
+	printf("%-10.5d\n", 42);
+	printf("%10.5d\n", 42);
+
+	printf("%10.5d\n", 42);
+	printf("%05d\n", 42);
+
+	printf("%10d\n", 42);
+	printf("%5d\n", 42);
+
+	printf("%010d\n", 42);
+	printf("%05d\n", 42);
+
+
+
+
+
+
 	return (0);
 }*/

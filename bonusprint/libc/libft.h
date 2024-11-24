@@ -36,7 +36,7 @@ void				*ft_memset(void *str, int c, size_t n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putstr_fd(char *s, int fd);
+void					ft_putstr_fd(char *s, int fd);
 char				**ft_split(char const *str, char c);
 char				*ft_strchr(const char *str, int search_str);
 int					ft_strcmp(char *s1, char *s2);
@@ -57,8 +57,7 @@ int					ft_toupper(int c);
 
 typedef struct s_list
 {
-	void			*content;
-	int				order;
+	char			*content;
 	struct s_list	*next;
 }					t_list;
 

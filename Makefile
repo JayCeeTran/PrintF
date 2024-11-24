@@ -2,8 +2,7 @@ NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 EXE = a.out
-SOURCES = ft_put_p.c ft_putc.c ft_putnbr.c ft_printf.c ft_put_us_hex.c ft_putstr_fd.c
-
+SOURCES = ft_put_p.c ft_putc.c ft_putnbr.c ft_printf.c ft_put_us_hex.c ft_putstr_f.c
 OBJ = $(SOURCES:.c=.o)
 
 RM = rm -f
@@ -21,9 +20,9 @@ $(EXE):	$(NAME)
 
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(LIBOBJ)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(LIBFT)
 
 re: fclean all
