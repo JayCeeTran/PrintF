@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr_f.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtran <jtran@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:06:27 by jtran             #+#    #+#             */
-/*   Updated: 2024/11/06 14:17:55 by jtran            ###   ########.fr       */
+/*   Updated: 2024/11/26 15:57:21 by jtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 int	ft_putstr_f(void *s, int fd)
 {
-	int	count;
-	char *c;
+	int		count;
+	char	*c;
+	int		check;
 
-	c = (char *) s;
+	check = 0;
+	c = (char *)s;
 	if (s == NULL)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		check = write(1, "(null)", 6);
+		return (check);
 	}
 	count = 0;
 	while (*c)
 	{
-		write(fd, c, 1);
+		check = write(fd, c, 1);
+		if (check == -1)
+			return (check);
 		c++;
 		count++;
 	}

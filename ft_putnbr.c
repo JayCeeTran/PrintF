@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtran <jtran@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:15:58 by jtran             #+#    #+#             */
-/*   Updated: 2024/11/07 12:34:18 by jtran            ###   ########.fr       */
+/*   Updated: 2024/11/26 16:30:24 by jtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,33 @@
 
 static void	dutty_loop(int divider, int n, int *count, int fd)
 {
-		while (divider > 0)
+	int	check;
+
+	while (divider > 0)
+	{
+		check = ft_putc(n / divider + '0', fd);
+		if (check == -1)
 		{
-			ft_putc(n / divider + '0', fd);
-			n %= divider;
-			divider /= 10;
-			(*count)++;
+			(*count) = check;
+			break ;
 		}
+		n %= divider;
+		divider /= 10;
+		(*count)++;
+	}
 }
 
 int	ft_putnbr(int n, int fd)
 {
 	int	divider;
 	int	count;
-	
+
 	count = 0;
 	divider = 1;
 	if (n == -2147483648)
 	{
-		write(fd, "-2147483648", 11);
-		return (11);
+		count = write(fd, "-2147483648", 11);
+		return (count);
 	}
 	if (n < 0)
 	{

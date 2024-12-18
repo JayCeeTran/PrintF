@@ -1,4 +1,0 @@
-void writec()
-{
-	printf("TESTing");
-}

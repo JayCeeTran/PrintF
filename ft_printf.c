@@ -6,92 +6,68 @@
 /*   By: jtran <jtran@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:37:23 by jtran             #+#    #+#             */
-/*   Updated: 2024/11/13 12:37:26 by jtran            ###   ########.fr       */
+/*   Updated: 2024/11/27 15:29:57 by jtran            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdint.h>
-
 
 static int	check_symbol(const char **s, va_list args)
-{ 
+{
 	if (**s == 'c')
-		return(ft_putc(va_arg(args, int), 1));
-	else if (**s == 's')	
-		return(ft_putstr_f(va_arg(args, void *), 1));
+		return (ft_putc(va_arg(args, int), 1));
+	else if (**s == 's')
+		return (ft_putstr_f(va_arg(args, void *), 1));
 	else if (**s == 'p')
-		return(ft_put_p(va_arg(args, unsigned long long)));
+		return (ft_put_p(va_arg(args, unsigned long long)));
 	else if (**s == 'i' || **s == 'd')
-		return(ft_putnbr(va_arg(args, int), 1));
+		return (ft_putnbr(va_arg(args, int), 1));
 	else if (**s == 'u')
-		return(ft_put_us_hex(va_arg(args, unsigned int), "0123456789", 'u'));
+		return (ft_put_us_hex(va_arg(args, unsigned int), "0123456789", 'u'));
 	else if (**s == 'x')
-		return(ft_put_us_hex(va_arg(args, unsigned int), "0123456789abcdef", 'x'));
+		return (ft_put_us_hex(va_arg(args, unsigned int), "0123456789abcdef",
+				'x'));
 	else if (**s == 'X')
-		return(ft_put_us_hex(va_arg(args, unsigned int), "0123456789ABCDEF", 'X'));
+		return (ft_put_us_hex(va_arg(args, unsigned int), "0123456789ABCDEF",
+				'X'));
 	if (**s == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
-	return(0);
+		return (write(1, "%", 1));
+	return (-1);
+}
+
+static int	dutty_check(int *count, int check)
+{
+	if (check == -1)
+		return (-1);
+	(*count) += check;
+	return (1);
 }
 
 int	ft_printf(const char *s, ...)
 {
 	va_list	args;
-	int	count;
+	int		count;
+	int		check;
 
 	count = 0;
 	va_start(args, s);
 	while (*s)
 	{
 		if (*s == '%')
-		{	
-				s++;
-				count += check_symbol(&s, args);
+		{
+			s++;
+			check = check_symbol(&s, args);
+			if (dutty_check(&count, check) == -1)
+				return (-1);
 		}
 		else
 		{
-			write (1, &*s, 1);
-			count++;
+			if (write(1, &*s, 1) == -1)
+				return (-1);
+			count ++;
 		}
 		s++;
 	}
 	va_end(args);
 	return (count);
 }
-
-/*int	main(void)
-{
-	//ft_printf("%d\n", ft_printf("NULL %s NULL\n", NULL));
-	//printf("%d\n", printf("NULL %s NULL\n", NULL));
-
-//	ft_printf("%d\n", ft_printf("%10d\n", 42));
-//	printf("%d\n", printf("%10d\n", 42));
-
-//	ft_printf("%d\n", ft_printf("%-10d\n", 42));
-//	printf("%d\n", printf("%-10d\n", 42));
-
-	printf("%-10.5d\n", 42);
-	printf("%10.5d\n", 42);
-
-	printf("%10.5d\n", 42);
-	printf("%05d\n", 42);
-
-	printf("%10d\n", 42);
-	printf("%5d\n", 42);
-
-	printf("%010d\n", 42);
-	printf("%05d\n", 42);
-
-
-
-
-
-
-	return (0);
-}*/

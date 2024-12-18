@@ -1,7 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jtran <jtran@student.hive.fi>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/25 14:13:50 by jtran             #+#    #+#              #
+#    Updated: 2024/11/30 15:03:24 by jtran            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libftprintf.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-EXE = a.out
 SOURCES = ft_put_p.c ft_putc.c ft_putnbr.c ft_printf.c ft_put_us_hex.c ft_putstr_f.c
 OBJ = $(SOURCES:.c=.o)
 
@@ -12,17 +23,10 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	ar -rcs $(NAME) $(OBJ)
 
-run: $(EXE)
-	./a.out
-
-$(EXE):	$(NAME)
-	cc $(CFLAGS) $(SOURCES) -o $(EXE)
-
-
 clean:
-	$(RM) $(OBJ) $(LIBOBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	$(RM) $(NAME)
 
 re: fclean all
